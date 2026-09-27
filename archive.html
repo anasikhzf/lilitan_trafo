@@ -199,6 +199,9 @@
                     <td><span class="badge">Rumus ${item.rumus}</span></td>
                     <td>${item.tanggal || '-'}</td>
                     <td>
+                        <button class="btn-action btn-pdf" onclick="cetakPdf(${index})" style="background:#0ea5e9;color:#fff;margin-right:4px;">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </button>
                         <button class="btn-action btn-danger" onclick="hapusArsip(${index})">
                             <i class="fa-solid fa-trash"></i> Hapus
                         </button>
@@ -206,6 +209,63 @@
                 </tr>
             `).join('');
         }
+
+        function cetakPdf(index) {
+            const arsipData = JSON.parse(localStorage.getItem('arsip_trafo') || '[]');
+            const data = arsipData[index];
+            if (!data) return;
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Laporan Perhitungan Trafo - ${data.no_seri || 'Trafo'}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 30px; color: #333; }
+                        h1 { color: #0ea5e9; text-align: center; border-bottom: 2px solid #0ea5e9; padding-bottom: 10px; }
+                        .info-table, .rekap-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        .info-table td, .rekap-table th, .rekap-table td { border: 1px solid #ddd; padding: 10px; }
+                        .rekap-table th { background: #f1f5f9; text-align: left; }
+                        .footer { margin-top: 40px; text-align: right; font-size: 12px; color: #666; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Laporan Perhitungan Lilitan Trafo</h1>
+                    <h3>Data Pemeriksaan Trafo</h3>
+                    <table class="info-table">
+                        <tr><td><strong>Nama Teknisi:</strong></td><td>${data.nama_teknisi || '-'}</td></tr>
+                        <tr><td><strong>No. Seri:</strong></td><td>${data.no_seri || '-'}</td></tr>
+                        <tr><td><strong>Merk:</strong></td><td>${data.merk || '-'}</td></tr>
+                        <tr><td><strong>Kapasitas:</strong></td><td>${data.kapasitas || '-'} kVA</td></tr>
+                        <tr><td><strong>Rumus Perhitungan:</strong></td><td>Rumus ${data.rumus || '-'}</td></tr>
+                        <tr><td><strong>Tanggal Cetak:</strong></td><td>${data.tanggal || '-'}</td></tr>
+                    </table>
+
+                    <h3>Hasil Rekapitulasi Perhitungan</h3>
+                    <table class="rekap-table">
+                        <thead>
+                            <tr><th>Item Perhitungan</th><th>Hasil</th></tr>
+                        </thead>
+                        <tbody>
+                            ${Object.keys(data.rekap || {}).map(k => `
+                                <tr><td>Perhitungan #${k}</td><td><strong>${data.rekap[k] || '-'}</strong></td></tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+
+                    <div class="footer">
+                        <p>Dicetak secara otomatis oleh LilitanTrafo PWA System (&copy; 2026 anasikhzf)</p>
+                    </div>
+                    <script>
+                        window.onload = function() { window.print(); }
+                    </script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+
 
         function hapusArsip(index) {
             if (confirm('Apakah Anda yakin ingin menghapus arsip ini?')) {
