@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LilitanTrafo - Perhitungan Perbaikan Lilitan Transformator 3 Fasa</title>
+    
+    <meta name="description" content="Aplikasi web PWA LilitanTrafo untuk perhitungan teknis perbaikan lilitan transformator distribusi 3 fasa secara presisi dan akurat.">
+    <meta name="keywords" content="LilitanTrafo, lilitan trafo, transformator 3 fasa, kalkulator trafo, PT Mulya Jatra">
+    <meta name="author" content="anasikhzf">
+    <meta name="theme-color" content="#0ea5e9">
+    
+    <meta property="og:title" content="LilitanTrafo - Perhitungan Lilitan Trafo 3 Fasa">
+    <meta property="og:description" content="Alat bantu perhitungan teknis perbaikan lilitan transformator distribusi 3 fasa offline & PWA.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="img/icon-512.png">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-bolt"></i>
+            <h2>LilitanTrafo</h2>
+        </a>
+
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1SxDBPjuc59oLSziGnxLFO8ZE0aGNZ1NA" target="_blank" rel="noopener"><i class="fa-solid fa-book-bookmark"></i> Rumus</a></li>
+                <li><a href="archive.html"><i class="fa-solid fa-box-archive"></i> Arsip</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button id="install-btn" class="btn-install btn-install-hidden" aria-label="Install App">
+                    <i class="fa-solid fa-download"></i> <span>Install</span>
+                </button>
+
+                <button id="theme-toggle" class="btn-icon" aria-label="Ganti Tema Mode">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <button id="hamburger-btn" class="hamburger" aria-label="Toggle Menu Navigasi">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <main class="hero">
+        <section class="hero-kiri">
+            <h1>Perhitungan <span>Perbaikan Lilitan</span></h1>
+            <h2>Transformator Distribusi 3 Fasa</h2>
+            <p>
+                Alat bantu perhitungan teknis presisi untuk perbaikan & rewinding lilitan transformator distribusi 3 fasa secara cepat, akurat, dan offline-ready.
+            </p>
+
+            <div class="card-container">
+                <!-- Card 1 -->
+                <article class="card">
+                    <i class="fa-solid fa-calculator"></i>
+                    <h3>RUMUS 1</h3>
+                    <p>PT Mulya Jatra</p>
+                    <a href="data-info-1.html" class="btn">Buka Rumus 1</a>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="card">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>RUMUS 2</h3>
+                    <p>Standar Jurnal</p>
+                    <a href="data-info-2.html" class="btn">Buka Rumus 2</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="hero-kanan">
+            <img src="img/Transformator.png" alt="Transformator Distribusi 3 Fasa LilitanTrafo" width="480" height="480">
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 LilitanTrafo. Created by <a href="https://anasikhzf.web.app" target="_blank" rel="noopener">anasikhzf</a>. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

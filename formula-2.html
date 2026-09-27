@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumus 2 Jurnal - LilitanTrafo</title>
+    
+    <meta name="description" content="Kalkulator Perhitungan Lilitan Trafo Rumus 2 Standar Jurnal pada LilitanTrafo.">
+    <meta name="author" content="anasikhzf">
+    <meta name="theme-color" content="#0ea5e9">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-bolt"></i>
+            <h2>LilitanTrafo</h2>
+        </a>
+
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1SxDBPjuc59oLSziGnxLFO8ZE0aGNZ1NA" target="_blank" rel="noopener"><i class="fa-solid fa-book-bookmark"></i> Rumus</a></li>
+                <li><a href="archive.html"><i class="fa-solid fa-box-archive"></i> Arsip</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button id="install-btn" class="btn-install btn-install-hidden" aria-label="Install App">
+                    <i class="fa-solid fa-download"></i> <span>Install</span>
+                </button>
+
+                <button id="theme-toggle" class="btn-icon" aria-label="Ganti Tema Mode">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <button id="hamburger-btn" class="hamburger" aria-label="Toggle Menu Navigasi">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HEADER RUMUS -->
+    <div class="header-rumus">
+        <div class="header-kiri">
+            <a href="data-info-2.html" class="btn-kembali"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        </div>
+        <div class="header-tengah">
+            <h1>RUMUS 2</h1>
+            <p>Perhitungan Lilitan Menggunakan Rumus Jurnal</p>
+        </div>
+        <div class="header-kanan">
+            <button class="btn-pdf" id="btn-simpan-arsip"><i class="fa-solid fa-floppy-disk"></i> Simpan Arsip</button>
+        </div>
+    </div>
+
+    <!-- MAIN CALCULATOR -->
+    <main class="layout-utama">
+        <!-- PANEL KIRI (PILIHAN) -->
+        <aside class="panel-kiri">
+            <div class="judul-pilih">PILIH PERHITUNGAN</div>
+            <button class="pilihan active" data-id="1" data-title="Rasio Tegangan Antar Tap (X)">
+                <span class="nomor">1</span>
+                <span class="pilihan-text"><strong>Rasio Tegangan (X)</strong></span>
+                <span class="titik">●</span>
+            </button>
+            <button class="pilihan" data-id="2" data-title="Jumlah Lilitan Sekunder (Ns)">
+                <span class="nomor">2</span>
+                <span class="pilihan-text"><strong>Lilitan Sekunder (Ns)</strong></span>
+                <span class="titik">●</span>
+            </button>
+            <button class="pilihan" data-id="3" data-title="Jumlah Lilitan Primer (Np)">
+                <span class="nomor">3</span>
+                <span class="pilihan-text"><strong>Lilitan Primer (Np)</strong></span>
+                <span class="titik">●</span>
+            </button>
+            <button class="pilihan" data-id="4" data-title="Jumlah Lilitan Dalam Satu Lapis (Ny)">
+                <span class="nomor">4</span>
+                <span class="pilihan-text"><strong>Lilitan Satu Lapis (Ny)</strong></span>
+                <span class="titik">●</span>
+            </button>
+            <button class="pilihan" data-id="5" data-title="Jumlah Lapisan Lilitan (Nl)">
+                <span class="nomor">5</span>
+                <span class="pilihan-text"><strong>Lapisan Lilitan (Nl)</strong></span>
+                <span class="titik">●</span>
+            </button>
+        </aside>
+
+        <!-- PANEL TENGAH (FORM & HASIL) -->
+        <section class="panel-tengah">
+            <div class="card-data">
+                <div class="card-header">
+                    <div class="icon-card"><i class="fa-solid fa-pen-to-square"></i></div>
+                    <div>
+                        <h2 id="judulHalaman">Rasio Tegangan Antar Tap (X)</h2>
+                        <p>Isi data lalu klik Hitung</p>
+                    </div>
+                </div>
+
+                <div id="formInput"></div>
+
+                <div class="tombol-aksi">
+                    <button type="button" class="btn-hitung" onclick="hitung()"><i class="fa-solid fa-calculator"></i> Hitung</button>
+                    <button type="button" class="btn-reset" onclick="resetInput()"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+                </div>
+
+                <div class="card-hasil">
+                    <div class="card-header">
+                        <div class="icon-hasil"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h2>Hasil Perhitungan</h2>
+                            <p>Hasil akan tampil di bawah</p>
+                        </div>
+                    </div>
+                    <div class="hasil-box" id="hasilBox">
+                        <p>Hasil akan muncul di sini</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL KANAN (REKAP) -->
+        <aside class="panel-kanan">
+            <div class="rekap-card">
+                <div class="rekap-header">
+                    <div class="rekap-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <div>
+                        <h3>REKAP PERHITUNGAN</h3>
+                        <p>Ringkasan Hasil Rumus 2</p>
+                    </div>
+                </div>
+                <div class="rekap-body">
+                    <div class="rekap-item"><span>1. Rasio Tegangan (X):</span><strong id="rekap1">-</strong></div>
+                    <div class="rekap-item"><span>2. Lilitan Sekunder (Ns):</span><strong id="rekap2">-</strong></div>
+                    <div class="rekap-item"><span>3. Lilitan Primer (Np):</span><strong id="rekap3">-</strong></div>
+                    <div class="rekap-item"><span>4. Lilitan Satu Lapis (Ny):</span><strong id="rekap4">-</strong></div>
+                    <div class="rekap-item"><span>5. Lapisan Lilitan (Nl):</span><strong id="rekap5">-</strong></div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 LilitanTrafo. Created by <a href="https://anasikhzf.web.app" target="_blank" rel="noopener">anasikhzf</a>. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/formula-2.js"></script>
+</body>
+</html>

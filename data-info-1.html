@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemeriksaan Trafo Rekondisi (Rumus 1) - LilitanTrafo</title>
+    
+    <meta name="description" content="Form input data teknis pemeriksaan trafo rekondisi 3 fasa untuk kalkulasi Rumus 1 PT Mulya Jatra pada LilitanTrafo.">
+    <meta name="author" content="anasikhzf">
+    <meta name="theme-color" content="#0ea5e9">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-bolt"></i>
+            <h2>LilitanTrafo</h2>
+        </a>
+
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1SxDBPjuc59oLSziGnxLFO8ZE0aGNZ1NA" target="_blank" rel="noopener"><i class="fa-solid fa-book-bookmark"></i> Rumus</a></li>
+                <li><a href="archive.html"><i class="fa-solid fa-box-archive"></i> Arsip</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button id="install-btn" class="btn-install btn-install-hidden" aria-label="Install App">
+                    <i class="fa-solid fa-download"></i> <span>Install</span>
+                </button>
+
+                <button id="theme-toggle" class="btn-icon" aria-label="Ganti Tema Mode">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <button id="hamburger-btn" class="hamburger" aria-label="Toggle Menu Navigasi">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-wrapper">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>FORM PEMERIKSAAN<br>TRAFO REKONDISI (RUMUS 1)</h1>
+                <p>Silakan lengkapi data pemeriksaan trafo PT Mulya Jatra</p>
+            </div>
+
+            <form id="form-trafo-1">
+                <div class="form-columns">
+                    <!-- KOLOM KIRI -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="nama_teknisi"><span class="number">1</span> Nama Teknisi</label>
+                            <input type="text" id="nama_teknisi" name="nama_teknisi" placeholder="Masukkan nama teknisi" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="no_seri"><span class="number">2</span> No. Seri</label>
+                            <input type="text" id="no_seri" name="no_seri" placeholder="Masukkan nomor seri trafo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="merk"><span class="number">3</span> Merk</label>
+                            <input type="text" id="merk" name="merk" placeholder="Masukkan merk trafo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kapasitas"><span class="number">4</span> Kapasitas</label>
+                            <div class="input-satuan">
+                                <input type="number" id="kapasitas" name="kapasitas" placeholder="Masukkan kapasitas" min="0" step="0.01" required>
+                                <span>kVA</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tgl_datang"><span class="number">5</span> Tanggal Datang</label>
+                            <input type="date" id="tgl_datang" name="tgl_datang" required>
+                        </div>
+                    </div>
+
+                    <!-- KOLOM KANAN -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="asal_gudang"><span class="number">6</span> Asal Gudang</label>
+                            <input type="text" id="asal_gudang" name="asal_gudang" placeholder="Masukkan asal gudang" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vol_minyak"><span class="number">7</span> Vol. Minyak</label>
+                            <div class="input-satuan">
+                                <input type="number" id="vol_minyak" name="vol_minyak" placeholder="Volume minyak" min="0" step="0.01" required>
+                                <select id="satuan_minyak" name="satuan_minyak" required>
+                                    <option value="kg">kg</option>
+                                    <option value="liter">Liter</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vektor"><span class="number">8</span> Vektor</label>
+                            <input type="text" id="vektor" name="vektor" placeholder="Masukkan vektor trafo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kerusakan"><span class="number">9</span> Kerusakan</label>
+                            <textarea id="kerusakan" name="kerusakan" placeholder="Masukkan rincian kerusakan" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-area">
+                    <button type="button" class="btn-kembali" onclick="window.location.href='index.html'">Kembali</button>
+                    <button type="submit" class="btn-lanjut">Lanjut</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 LilitanTrafo. Created by <a href="https://anasikhzf.web.app" target="_blank" rel="noopener">anasikhzf</a>. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('form-trafo-1').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const dataTrafo = {};
+            formData.forEach((value, key) => dataTrafo[key] = value);
+            
+            localStorage.setItem('data_trafo_rumus1', JSON.stringify(dataTrafo));
+            localStorage.setItem('active_rumus', '1');
+            window.location.href = 'formula-1.html';
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedData = localStorage.getItem('data_trafo_rumus1');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                Object.keys(data).forEach(key => {
+                    const el = document.getElementById(key);
+                    if (el) el.value = data[key];
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsip Perhitungan Trafo - LilitanTrafo</title>
+    
+    <meta name="description" content="Riwayat dan Arsip Perhitungan Perbaikan Lilitan Transformator Distribusi 3 Fasa pada LilitanTrafo.">
+    <meta name="author" content="anasikhzf">
+    <meta name="theme-color" content="#0ea5e9">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .arsip-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .arsip-header-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .arsip-header-title h1 {
+            font-size: 24px;
+            color: var(--text-main);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        th {
+            background-color: rgba(0,0,0,0.15);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-bolt"></i>
+            <h2>LilitanTrafo</h2>
+        </a>
+
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1SxDBPjuc59oLSziGnxLFO8ZE0aGNZ1NA" target="_blank" rel="noopener"><i class="fa-solid fa-book-bookmark"></i> Rumus</a></li>
+                <li><a href="archive.html" class="active"><i class="fa-solid fa-box-archive"></i> Arsip</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button id="install-btn" class="btn-install btn-install-hidden" aria-label="Install App">
+                    <i class="fa-solid fa-download"></i> <span>Install</span>
+                </button>
+
+                <button id="theme-toggle" class="btn-icon" aria-label="Ganti Tema Mode">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <button id="hamburger-btn" class="hamburger" aria-label="Toggle Menu Navigasi">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="arsip-container">
+        <div class="arsip-header-title">
+            <h1><i class="fa-solid fa-box-archive"></i> Arsip Perhitungan Trafo</h1>
+            <button class="btn-action btn-danger" onclick="hapusSemuaArsip()"><i class="fa-solid fa-trash"></i> Hapus Semua</button>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>No. Seri</th>
+                        <th>Teknisi</th>
+                        <th>Merk</th>
+                        <th>Kapasitas</th>
+                        <th>Rumus</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="arsip-list">
+                    <!-- Dynamic rendering oleh JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 LilitanTrafo. Created by <a href="https://anasikhzf.web.app" target="_blank" rel="noopener">anasikhzf</a>. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        function renderArsip() {
+            const tbody = document.getElementById('arsip-list');
+            const arsipData = JSON.parse(localStorage.getItem('arsip_trafo') || '[]');
+
+            if (arsipData.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <i class="fa-solid fa-folder-open"></i>
+                                <p>Belum ada data arsip perhitungan yang tersimpan.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = arsipData.map((item, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><strong>${item.no_seri || '-'}</strong></td>
+                    <td>${item.nama_teknisi || '-'}</td>
+                    <td>${item.merk || '-'}</td>
+                    <td>${item.kapasitas || '-'} kVA</td>
+                    <td><span class="badge">Rumus ${item.rumus}</span></td>
+                    <td>${item.tanggal || '-'}</td>
+                    <td>
+                        <button class="btn-action btn-danger" onclick="hapusArsip(${index})">
+                            <i class="fa-solid fa-trash"></i> Hapus
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function hapusArsip(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus arsip ini?')) {
+                const arsipData = JSON.parse(localStorage.getItem('arsip_trafo') || '[]');
+                arsipData.splice(index, 1);
+                localStorage.setItem('arsip_trafo', JSON.stringify(arsipData));
+                renderArsip();
+            }
+        }
+
+        function hapusSemuaArsip() {
+            if (confirm('Apakah Anda yakin ingin menghapus SEMUA arsip?')) {
+                localStorage.removeItem('arsip_trafo');
+                renderArsip();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderArsip);
+    </script>
+</body>
+</html>
