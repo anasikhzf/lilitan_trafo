@@ -22,7 +22,7 @@
         .arsip-container {
             width: 100%;
             max-width: 1100px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
             flex: 1;
         }
@@ -32,18 +32,23 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .arsip-header-title h1 {
-            font-size: 24px;
+            font-size: 22px;
             color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .table-responsive {
             width: 100%;
             overflow-x: auto;
             background: var(--bg-secondary);
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow);
         }
@@ -59,6 +64,7 @@
             padding: 14px 16px;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-main);
+            white-space: nowrap;
         }
 
         th {
@@ -71,6 +77,16 @@
             border-bottom: none;
         }
 
+        .badge {
+            background: var(--bg-primary);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
         .btn-action {
             padding: 6px 12px;
             border-radius: 6px;
@@ -81,6 +97,17 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            font-family: inherit;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        .btn-pdf {
+            background-color: var(--accent);
+            color: #ffffff;
         }
 
         .btn-danger {
@@ -88,20 +115,23 @@
             color: white;
         }
 
-        .btn-danger:hover {
-            background-color: #dc2626;
-        }
-
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             color: var(--text-muted);
         }
 
         .empty-state i {
-            font-size: 48px;
-            margin-bottom: 12px;
+            font-size: 54px;
+            margin-bottom: 16px;
             color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .arsip-container { padding: 0 12px; margin: 20px auto; }
+            .arsip-header-title h1 { font-size: 18px; }
+            th, td { padding: 10px 12px; font-size: 13px; }
+            .btn-action { padding: 5px 8px; font-size: 12px; }
         }
     </style>
 </head>
@@ -199,7 +229,7 @@
                     <td><span class="badge">Rumus ${item.rumus}</span></td>
                     <td>${item.tanggal || '-'}</td>
                     <td>
-                        <button class="btn-action btn-pdf" onclick="cetakPdf(${index})" style="background:#0ea5e9;color:#fff;margin-right:4px;">
+                        <button class="btn-action btn-pdf" onclick="cetakPdf(${index})">
                             <i class="fa-solid fa-file-pdf"></i> PDF
                         </button>
                         <button class="btn-action btn-danger" onclick="hapusArsip(${index})">
@@ -222,34 +252,43 @@
                 <head>
                     <title>Laporan Perhitungan Trafo - ${data.no_seri || 'Trafo'}</title>
                     <style>
-                        body { font-family: Arial, sans-serif; padding: 30px; color: #333; }
-                        h1 { color: #0ea5e9; text-align: center; border-bottom: 2px solid #0ea5e9; padding-bottom: 10px; }
-                        .info-table, .rekap-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                        .info-table td, .rekap-table th, .rekap-table td { border: 1px solid #ddd; padding: 10px; }
-                        .rekap-table th { background: #f1f5f9; text-align: left; }
-                        .footer { margin-top: 40px; text-align: right; font-size: 12px; color: #666; }
+                        body { font-family: Arial, sans-serif; padding: 30px; color: #333; line-height: 1.6; }
+                        h1 { color: #0ea5e9; text-align: center; border-bottom: 2px solid #0ea5e9; padding-bottom: 10px; margin-bottom: 20px; }
+                        h3 { color: #0f172a; margin-top: 24px; border-left: 4px solid #0ea5e9; padding-left: 10px; }
+                        .info-table, .rekap-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+                        .info-table td, .rekap-table th, .rekap-table td { border: 1px solid #cbd5e1; padding: 10px 14px; text-align: left; }
+                        .info-table td:first-child { width: 35%; background: #f8fafc; }
+                        .rekap-table th { background: #0ea5e9; color: #ffffff; }
+                        .footer { margin-top: 50px; text-align: right; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; }
                     </style>
                 </head>
                 <body>
                     <h1>Laporan Perhitungan Lilitan Trafo</h1>
-                    <h3>Data Pemeriksaan Trafo</h3>
+                    
+                    <h3>1. Data Pemeriksaan Trafo</h3>
                     <table class="info-table">
-                        <tr><td><strong>Nama Teknisi:</strong></td><td>${data.nama_teknisi || '-'}</td></tr>
-                        <tr><td><strong>No. Seri:</strong></td><td>${data.no_seri || '-'}</td></tr>
-                        <tr><td><strong>Merk:</strong></td><td>${data.merk || '-'}</td></tr>
-                        <tr><td><strong>Kapasitas:</strong></td><td>${data.kapasitas || '-'} kVA</td></tr>
-                        <tr><td><strong>Rumus Perhitungan:</strong></td><td>Rumus ${data.rumus || '-'}</td></tr>
-                        <tr><td><strong>Tanggal Cetak:</strong></td><td>${data.tanggal || '-'}</td></tr>
+                        <tr><td><strong>Nama Teknisi</strong></td><td>${data.nama_teknisi || '-'}</td></tr>
+                        <tr><td><strong>No. Seri</strong></td><td>${data.no_seri || '-'}</td></tr>
+                        <tr><td><strong>Merk Trafo</strong></td><td>${data.merk || '-'}</td></tr>
+                        <tr><td><strong>Kapasitas</strong></td><td>${data.kapasitas || '-'} kVA</td></tr>
+                        <tr><td><strong>Metode Rumus</strong></td><td>Rumus ${data.rumus || '-'}</td></tr>
+                        <tr><td><strong>Tanggal Penyimpanan</strong></td><td>${data.tanggal || '-'}</td></tr>
                     </table>
 
-                    <h3>Hasil Rekapitulasi Perhitungan</h3>
+                    <h3>2. Hasil Rekapitulasi Perhitungan</h3>
                     <table class="rekap-table">
                         <thead>
-                            <tr><th>Item Perhitungan</th><th>Hasil</th></tr>
+                            <tr>
+                                <th>Item Perhitungan</th>
+                                <th>Hasil Perhitungan</th>
+                            </tr>
                         </thead>
                         <tbody>
                             ${Object.keys(data.rekap || {}).map(k => `
-                                <tr><td>Perhitungan #${k}</td><td><strong>${data.rekap[k] || '-'}</strong></td></tr>
+                                <tr>
+                                    <td>Perhitungan Bagian #${k}</td>
+                                    <td><strong>${data.rekap[k] || '-'}</strong></td>
+                                </tr>
                             `).join('')}
                         </tbody>
                     </table>
@@ -259,13 +298,12 @@
                     </div>
                     <script>
                         window.onload = function() { window.print(); }
-                    </script>
+                    <\/script>
                 </body>
                 </html>
             `);
             printWindow.document.close();
         }
-
 
         function hapusArsip(index) {
             if (confirm('Apakah Anda yakin ingin menghapus arsip ini?')) {
