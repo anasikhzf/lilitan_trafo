@@ -168,7 +168,7 @@ footer a:hover { text-decoration: underline; }
   .card h3 { font-size: 1rem; }
   .card p { font-size: 0.75rem; margin-bottom: 10px; }
   .card .btn { padding: 8px 6px; font-size: 12px; }
-  .hero-kanan img { width: 240px; transform: none; }
+  .hero-kanan img { width: 340px; max-width: 90%; transform: none; margin: 10px auto; }
   .header-rumus { flex-direction: column; text-align: center; gap: 12px; }
   .header-kiri, .header-kanan { width: 100%; justify-content: center; }
   .btn-install span { display: none; }
